@@ -66,6 +66,7 @@ plt.show()
 
 
 
+
 plt.figure(figsize=(6, 6))
 sns.barplot(x='CITY', y='Person served per hospital', 
             data=tier1_df.sort_values('Person served per hospital', ascending=False))
@@ -91,3 +92,31 @@ tier_stats = df.groupby('Tier').agg({
 
 print("\nTier-wise Statistics:")
 print(tier_stats)
+
+
+
+
+
+# Hospital distribution by tier
+plt.figure(figsize=(16, 10))
+
+plt.subplot(2, 2, 1)
+sns.barplot(x='Tier', y='HOSPITAL_COUNT', data=tier_stats)
+plt.title('Total Hospitals by Tier')
+
+plt.subplot(2, 2, 2)
+sns.barplot(x='Tier', y='Hospitals per sqkm', data=tier_stats)
+plt.title('Average Hospital Density by Tier')
+
+plt.subplot(2, 2, 3)
+sns.barplot(x='Tier', y='Hospitals per person', data=tier_stats)
+plt.title('Average Hospitals per Person by Tier')
+
+plt.subplot(2, 2, 4)
+sns.barplot(x='Tier', y='Person served per hospital', data=tier_stats)
+plt.title('Average Persons Served per Hospital by Tier')
+
+plt.tight_layout()
+plt.show()
+
+
