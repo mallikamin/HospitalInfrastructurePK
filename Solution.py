@@ -146,3 +146,15 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
+
+
+
+corr_matrix = tier1_df[['HOSPITAL_COUNT', 'POPULATION_2024_2025', 'AREA_SQ_KM', 
+                       'Hospitals per sqkm', 'Pop. Per sq km', 
+                       'Hospitals per person', 'Person served per hospital']].corr()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
+plt.title('Correlation Matrix for Tier 1 Cities')
+plt.tight_layout()
+plt.show()
