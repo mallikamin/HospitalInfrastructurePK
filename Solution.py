@@ -284,3 +284,30 @@ plt.legend(title='Hospital Count', loc='upper right', framealpha=1)
 
 plt.tight_layout()
 plt.show()
+
+
+
+
+
+
+plt.figure(figsize=(10, 6))
+data = df[df['CITY'].isin(['Faisalabad', 'Lahore'])].copy()
+metrics = ['HOSPITAL_COUNT', 'Person served per hospital', 
+          'Hospitals per sqkm', 'Pop. Per sq km',
+          'Hospitals per person']
+normalized = data[metrics].set_index(data['CITY']).T
+normalized = normalized/normalized.max()
+
+normalized.plot(kind='bar', width=0.7, color=['#1f77b4', '#ff7f0e'])
+plt.title('Normalized Healthcare Metrics Comparison', pad=15)
+plt.ylabel('Normalized Value (0-1 scale)')
+plt.xlabel('Metric')
+plt.xticks(rotation=25, ha='right')
+plt.legend(title='City', framealpha=1)
+plt.grid(True, axis='y', linestyle='--', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+
+
