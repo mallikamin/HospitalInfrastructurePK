@@ -244,3 +244,43 @@ for p in ax.patches:
 
 plt.tight_layout()
 plt.show()
+
+
+
+
+
+plt.figure(figsize=(9, 6))
+data = df[df['CITY'].isin(['Faisalabad', 'Lahore'])].copy()
+
+sc = plt.scatter(data['Pop. Per sq km'], 
+                data['Hospitals per person']*100000,
+                s=data['HOSPITAL_COUNT']/5,
+                c=data['CITY'].map({'Faisalabad': '#1f77b4', 'Lahore': '#ff7f0e'}),
+                alpha=0.8)
+
+# Label positioning
+label_pos = {
+    'Faisalabad': (15, 5),
+    'Lahore': (-15, 5)
+}
+
+for i, row in data.iterrows():
+    plt.annotate(row['CITY'], 
+                (row['Pop. Per sq km'], row['Hospitals per person']*100000),
+                textcoords="offset points", 
+                xytext=label_pos[row['CITY']],
+                ha='center',
+                bbox=dict(boxstyle='round,pad=0.3', fc='white', alpha=0.8))
+
+plt.title('Population Density vs Hospital Accessibility', pad=15)
+plt.xlabel('Population Density (people per sq km)')
+plt.ylabel('Hospitals per 100,000 people')
+plt.grid(True, linestyle='--', alpha=0.3)
+
+# Bubble size legend
+for size, label in [(20, '100'), (60, '300'), (140, '700')]:
+    plt.scatter([], [], s=size, c='gray', alpha=0.7, label=f'{label} hospitals')
+plt.legend(title='Hospital Count', loc='upper right', framealpha=1)
+
+plt.tight_layout()
+plt.show()
