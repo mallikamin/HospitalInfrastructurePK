@@ -350,3 +350,19 @@ plt.tight_layout()
 plt.show()
 
 
+
+cities = ['Islamabad', 'Rawalpindi']
+metrics = ['HOSPITAL_COUNT', 'Hospitals per sqkm', 'Pop. Per sq km', 
+           'Hospitals per person', 'Person served per hospital']
+compare_df = df[df['CITY'].isin(cities)][['CITY'] + metrics].set_index('CITY').T
+
+plt.figure(figsize=(12, 8))
+compare_df.plot(kind='bar', width=0.8, figsize=(12,6))
+plt.title('Islamabad vs Rawalpindi: Detailed Healthcare Metrics Comparison')
+plt.ylabel('Value')
+plt.xlabel('Metric')
+plt.xticks(rotation=45)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.legend(title='City')
+plt.tight_layout()
+plt.show()
