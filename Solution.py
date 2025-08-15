@@ -21,6 +21,7 @@ print(df.info())
 
 
 
+
 # Filter Tier 1 cities
 tier1_df = df[df['Tier'] == 'Tier 1']
 
@@ -37,11 +38,27 @@ print(tier1_df[['CITY', 'HOSPITAL_COUNT', 'POPULATION_2024_2025', 'AREA_SQ_KM',
                 'Person served per hospital']].sort_values('HOSPITAL_COUNT', ascending=False))
 
 
-plt.figure(figsize=(12, 6))
+
+
+plt.figure(figsize=(6, 6))
 sns.barplot(x='CITY', y='HOSPITAL_COUNT', data=tier1_df.sort_values('HOSPITAL_COUNT', ascending=False))
 plt.title('Number of Hospitals in Tier 1 Cities')
 plt.xlabel('City')
 plt.ylabel('Number of Hospitals')
 plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+
+
+
+plt.figure(figsize=(12, 6))
+plt.scatter(tier1_df['Pop. Per sq km'], tier1_df['Hospitals per sqkm'], s=tier1_df['HOSPITAL_COUNT']*2)
+for i, row in tier1_df.iterrows():
+    plt.text(row['Pop. Per sq km'], row['Hospitals per sqkm'], row['CITY'], fontsize=9)
+plt.title('Population Density vs Hospital Density in Tier 1 Cities')
+plt.xlabel('Population per sq km')
+plt.ylabel('Hospitals per sq km')
+plt.grid(True)
 plt.tight_layout()
 plt.show()
