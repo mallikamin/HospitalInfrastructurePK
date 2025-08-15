@@ -311,3 +311,42 @@ plt.show()
 
 
 
+
+
+
+from math import pi
+
+categories = ['HOSPITAL_COUNT','Hospitals per sqkm','Hospitals per person','Person served per hospital']
+cities = ['Lahore', 'Karachi']
+compare_df = df[df['CITY'].isin(cities)][['CITY'] + categories]
+
+# Normalize data for radar chart
+compare_df_norm = compare_df.copy()
+for col in categories:
+    compare_df_norm[col] = compare_df_norm[col]/compare_df_norm[col].max()
+
+N = len(categories)
+angles = [n / float(N) * 2 * pi for n in range(N)]
+angles += angles[:1]
+
+plt.figure(figsize=(10, 10))
+ax = plt.subplot(111, polar=True)
+ax.set_theta_offset(pi/2)
+ax.set_theta_direction(-1)
+plt.xticks(angles[:-1], categories)
+ax.set_rlabel_position(0)
+plt.yticks([0.25,0.5,0.75,1], ["25%","50%","75%","100%"], color="grey", size=7)
+plt.ylim(0,1)
+
+for idx, row in compare_df_norm.iterrows():
+    values = row[categories].values.flatten().tolist()
+    values += values[:1]
+    ax.plot(angles, values, linewidth=2, linestyle='solid', label=row['CITY'])
+    ax.fill(angles, values, alpha=0.25)
+
+plt.title('Lahore vs Karachi Healthcare Metrics Comparison (Normalized)', y=1.1)
+plt.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1))
+plt.tight_layout()
+plt.show()
+
+
