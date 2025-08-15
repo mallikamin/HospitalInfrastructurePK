@@ -158,3 +158,20 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
 plt.title('Correlation Matrix for Tier 1 Cities')
 plt.tight_layout()
 plt.show()
+
+
+
+
+# Cities with highest and lowest hospital density
+print("\nTop 5 Cities by Hospital Density:")
+print(df.nlargest(5, 'Hospitals per sqkm')[['CITY', 'Hospitals per sqkm']])
+
+print("\nBottom 5 Cities by Hospital Density:")
+print(df.nsmallest(5, 'Hospitals per sqkm')[['CITY', 'Hospitals per sqkm']])
+
+# Cities serving most and least people per hospital
+print("\nTop 5 Cities by Persons Served per Hospital:")
+print(df.nlargest(5, 'Person served per hospital')[['CITY', 'Person served per hospital']])
+
+print("\nBottom 5 Cities by Persons Served per Hospital:")
+print(df.nsmallest(5, 'Person served per hospital')[['CITY', 'Person served per hospital']])
