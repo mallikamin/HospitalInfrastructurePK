@@ -175,3 +175,14 @@ print(df.nlargest(5, 'Person served per hospital')[['CITY', 'Person served per h
 
 print("\nBottom 5 Cities by Persons Served per Hospital:")
 print(df.nsmallest(5, 'Person served per hospital')[['CITY', 'Person served per hospital']])
+
+
+
+plt.figure(figsize=(12, 6))
+sns.kdeplot(data=df, x='Person served per hospital', hue='Tier', fill=True, common_norm=False, alpha=0.5)
+plt.title('Distribution of Persons Served per Hospital by Tier')
+plt.xlabel('Persons Served per Hospital')
+plt.ylabel('Density')
+plt.xlim(0, 30000)
+plt.tight_layout()
+plt.show()
