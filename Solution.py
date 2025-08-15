@@ -186,3 +186,22 @@ plt.ylabel('Density')
 plt.xlim(0, 30000)
 plt.tight_layout()
 plt.show()
+
+
+
+
+plt.figure(figsize=(8, 5))
+ax = sns.barplot(x='CITY', y='HOSPITAL_COUNT', data=df[df['CITY'].isin(['Faisalabad', 'Lahore'])], 
+                palette=['#1f77b4', '#ff7f0e'], width=0.5)
+plt.title('Hospital Count Comparison: Faisalabad vs Lahore', pad=15)
+plt.xlabel('')
+plt.ylabel('Number of Hospitals')
+
+for p in ax.patches:
+    ax.annotate(f"{int(p.get_height()):,}", 
+               (p.get_x() + p.get_width()/2., p.get_height()),
+               ha='center', va='center', 
+               xytext=(0,7), textcoords='offset points')
+
+plt.tight_layout()
+plt.show()
