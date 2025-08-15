@@ -62,3 +62,16 @@ plt.ylabel('Hospitals per sq km')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+
+
+
+plt.figure(figsize=(6, 6))
+sns.barplot(x='CITY', y='Person served per hospital', 
+            data=tier1_df.sort_values('Person served per hospital', ascending=False))
+plt.title('Persons Served per Hospital in Tier 1 Cities')
+plt.xlabel('City')
+plt.ylabel('Persons per Hospital')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
