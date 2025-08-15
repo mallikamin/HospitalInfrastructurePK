@@ -225,3 +225,22 @@ for p in ax.patches:
 
 plt.tight_layout()
 plt.show()
+
+
+
+
+plt.figure(figsize=(8, 5))
+ax = sns.barplot(x='CITY', y='Hospitals per sqkm', data=df[df['CITY'].isin(['Faisalabad', 'Lahore'])], 
+                palette=['#1f77b4', '#ff7f0e'], width=0.5)
+plt.title('Hospital Density Comparison (per sq km)', pad=15)
+plt.xlabel('')
+plt.ylabel('Hospitals per square kilometer')
+
+for p in ax.patches:
+    ax.annotate(f"{p.get_height():.2f}", 
+               (p.get_x() + p.get_width()/2., p.get_height()),
+               ha='center', va='center', 
+               xytext=(0,7), textcoords='offset points')
+
+plt.tight_layout()
+plt.show()
