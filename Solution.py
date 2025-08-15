@@ -37,3 +37,11 @@ print(tier1_df[['CITY', 'HOSPITAL_COUNT', 'POPULATION_2024_2025', 'AREA_SQ_KM',
                 'Person served per hospital']].sort_values('HOSPITAL_COUNT', ascending=False))
 
 
+plt.figure(figsize=(12, 6))
+sns.barplot(x='CITY', y='HOSPITAL_COUNT', data=tier1_df.sort_values('HOSPITAL_COUNT', ascending=False))
+plt.title('Number of Hospitals in Tier 1 Cities')
+plt.xlabel('City')
+plt.ylabel('Number of Hospitals')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
