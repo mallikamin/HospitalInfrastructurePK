@@ -75,3 +75,19 @@ plt.ylabel('Persons per Hospital')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+
+
+
+
+tier_stats = df.groupby('Tier').agg({
+    'HOSPITAL_COUNT': 'sum',
+    'POPULATION_2024_2025': 'sum',
+    'AREA_SQ_KM': 'sum',
+    'Hospitals per sqkm': 'mean',
+    'Pop. Per sq km': 'mean',
+    'Hospitals per person': 'mean',
+    'Person served per hospital': 'mean'
+}).reset_index()
+
+print("\nTier-wise Statistics:")
+print(tier_stats)
