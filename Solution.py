@@ -120,3 +120,29 @@ plt.tight_layout()
 plt.show()
 
 
+
+
+province_stats = df.groupby('PROVINCE').agg({
+    'HOSPITAL_COUNT': 'sum',
+    'POPULATION_2024_2025': 'sum',
+    'AREA_SQ_KM': 'sum'
+}).reset_index()
+
+province_stats['Hospitals per million'] = (province_stats['HOSPITAL_COUNT'] / province_stats['POPULATION_2024_2025']) * 1000000
+province_stats['Hospitals per 1000 sqkm'] = (province_stats['HOSPITAL_COUNT'] / province_stats['AREA_SQ_KM']) * 1000
+
+plt.figure(figsize=(14, 6))
+
+plt.subplot(1, 2, 1)
+sns.barplot(x='PROVINCE', y='Hospitals per million', data=province_stats.sort_values('Hospitals per million', ascending=False))
+plt.title('Hospitals per Million Population by Province')
+plt.xticks(rotation=45)
+
+plt.subplot(1, 2, 2)
+sns.barplot(x='PROVINCE', y='Hospitals per 1000 sqkm', data=province_stats.sort_values('Hospitals per 1000 sqkm', ascending=False))
+plt.title('Hospitals per 1000 sq km by Province')
+plt.xticks(rotation=45)
+
+plt.tight_layout()
+plt.show()
+
